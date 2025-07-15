@@ -70,6 +70,6 @@ void main() {
     imageStore(color_image, texel_coords, current_color_trails_imposed);
     
     // feed post buffer to pre buffer
-    vec4 trails_output = max(trail_color, current_color * params.trail_persistence);
+    vec4 trails_output = max(trail_color, current_color);
     imageStore(trails_post_buffer, texel_coords, trails_output); 
 }
