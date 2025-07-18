@@ -8,16 +8,7 @@ layout(rgba16f, set = 1, binding = 0, rgba16f) uniform restrict writeonly image2
 
 layout(push_constant, std430) uniform Params {
     vec2 render_size;
-    float _pad2;
-    float _pad3;
-    float _pad4;
-    float _pad5;
-    float _pad6;
-    float _pad7;
-    float _pad8;
-    float _pad9;
-    float _pad10;
-    float _pad11;
+    vec2 _pad;
 } params;
 
 void main() {

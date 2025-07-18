@@ -183,8 +183,15 @@ func _render_callback(callback_type: int, render_data: RenderData) -> void:
 			push_constant.push_back(0)
 			push_constant.push_back(0)
 
+			# push constant with only 4 entries for the copy screen pipline
+			var copy_push_constant := push_constant.slice(0, 4)
+
 			var push_constant_bytes := push_constant.to_byte_array()
 			var push_constant_size := push_constant.size() * 4
+
+			var copy_push_constant_bytes := copy_push_constant.to_byte_array()
+			var copy_push_constant_size := copy_push_constant.size() * 4
+
 			var view_count := render_scene_buffers.get_view_count()
 
 			for view in range(view_count):
@@ -205,7 +212,7 @@ func _render_callback(callback_type: int, render_data: RenderData) -> void:
 				rd.compute_list_bind_compute_pipeline(compute_list, copy_pipeline)
 				rd.compute_list_bind_uniform_set(compute_list, color_uniform_set, 0)
 				rd.compute_list_bind_uniform_set(compute_list, color_copy_uniform_set, 1)
-				rd.compute_list_set_push_constant(compute_list, push_constant_bytes, push_constant_size)
+				rd.compute_list_set_push_constant(compute_list, copy_push_constant_bytes, copy_push_constant_size)
 				rd.compute_list_dispatch(compute_list, x_groups, y_groups, z_groups)
 				rd.compute_list_end()
 				# rd.draw_command_end_label()
@@ -247,7 +254,7 @@ func _render_callback(callback_type: int, render_data: RenderData) -> void:
 				rd.compute_list_bind_compute_pipeline(compute_list, copy_pipeline)
 				rd.compute_list_bind_uniform_set(compute_list, post_uniform_set, 0)
 				rd.compute_list_bind_uniform_set(compute_list, pre_uniform_set, 1)
-				rd.compute_list_set_push_constant(compute_list, push_constant_bytes, push_constant_size)
+				rd.compute_list_set_push_constant(compute_list, copy_push_constant_bytes, copy_push_constant_size)
 				rd.compute_list_dispatch(compute_list, x_groups, y_groups, z_groups)
 				rd.compute_list_end()
 				# rd.draw_command_end_label()
