@@ -50,7 +50,7 @@ func _init() -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_PREDELETE:
-		var rids := [copy_shader, copy_pipeline, linear_sampler]
+		var rids := [copy_shader, copy_pipeline, trails_shader, trails_pipeline, linear_sampler]
 
 		for rid in rids:
 			if rid && rid.is_valid(): rd.free_rid(rid)
