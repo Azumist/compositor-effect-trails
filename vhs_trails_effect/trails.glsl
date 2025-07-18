@@ -64,7 +64,7 @@ void main() {
 
     vec4 current_color_trails_imposed = max(current_color, trail_color * params.trail_intensity) * lighten_flag +
         (current_color + trail_color * params.trail_intensity) * additive_flag +
-        (vec4(1.0) - (vec4(1.0) - current_color) * (vec4(1.0) - trail_color * params.trail_intensity)) * screen_flag;
+        (1.0 - (1.0 - current_color) * (1.0 - trail_color * params.trail_intensity)) * screen_flag;
 
     // compose
     imageStore(color_image, texel_coords, current_color_trails_imposed);
